@@ -3,6 +3,6 @@
 from typing import Callable
 
 
-def make_multiplier(multiplayer: float) -> Callable[[float], float]:
+def make_multiplier(multiplier: float) -> Callable[[float], float]:
     """complex types functions"""
-    return lambda x: multiplayer ** 2
+    return lambda x: x * multiplier
