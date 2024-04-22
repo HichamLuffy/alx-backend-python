@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
+"""concurrent coroutines"""
+import asyncio
+from typing import List
 
-import time
 
-def task(id):
-    print(f'Task {id} started')
-    time.sleep(1)  # Simulating a blocking I/O-bound task (e.g., network call)
-    print(f'Task {id} finished')
+wait_random = __import__('0-basic_async_syntax').wait_random
 
-def main():
-    task(1)
-    task(2)
-    task(3)
 
-main()
+async def wait_n(n: int, max_delay: int) -> List[float]:
+    """concurrent coroutines function"""
+    tasks = [wait_random(max_delay) for _ in range(n)]
+    delays = await asyncio.gather(*tasks)
+    return sorted(delays)
