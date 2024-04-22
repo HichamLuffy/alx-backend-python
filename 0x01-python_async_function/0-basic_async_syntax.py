@@ -1,15 +1,9 @@
-#!/usr/bin/python3
+#!/usr/bin/env python3
+"""async syntax"""
+import asyncio, random
 
 
-import asyncio
-
-async def task(id):
-    print(f'Task {id} started')
-    await asyncio.sleep(1)  # Non-blocking sleep
-    print(f'Task {id} finished')
-
-async def main():
-    await asyncio.gather(task(1), task(2), task(3))
-
-# This is how you run the asyncio event loop
-asyncio.run(main())
+async def wait_random(max_delay: int = 10) -> float:
+    delay = random.uniform(0, max_delay)
+    await asyncio.sleep(delay)
+    return delay
