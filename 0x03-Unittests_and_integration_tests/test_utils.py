@@ -39,8 +39,9 @@ class TestGetJson(unittest.TestCase):
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False}),
     ])
+
     def test_get_json(
-        self, test_url: str, test_payload: Dict[str, Any])-> None:
+        self, test_url: str, test_payload: Dict[str, Any]) -> None:
         """FUNC """
         with patch('requests.get') as mocked_get:
             mocked_get.return_value.json.return_value = test_payload
@@ -64,7 +65,8 @@ class TestMemoize(unittest.TestCase):
                 """DOC"""
                 return self.a_method()
 
-        with patch.object(TestClass, 'a_method', return_value=42) as mock_method:
+        with patch.object(
+            TestClass, 'a_method', return_value=42) as mock_method:
             """func"""
             instance = TestClass()
             self.assertEqual(instance.a_property, 42)  # Calls the a_method
