@@ -54,6 +54,7 @@ class TestMemoize(unittest.TestCase):
 
     def test_memoize(self) -> None:
         """func"""
+
         class TestClass:
             """class test"""
 
