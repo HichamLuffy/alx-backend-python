@@ -27,7 +27,7 @@ class TestAccessNestedMap(unittest.TestCase):
         ({"a": 1}, ("a", "b")),
     ])
     def test_access_nested_map_exception(
-        self, nested_map: Dict[str, Any], path: Tuple[str]) -> None:
+            self, nested_map: Dict[str, Any], path: Tuple[str]) -> None:
         """FUNC """
         with self.assertRaises(KeyError):
             access_nested_map(nested_map, path)
@@ -39,9 +39,8 @@ class TestGetJson(unittest.TestCase):
         ("http://example.com", {"payload": True}),
         ("http://holberton.io", {"payload": False}),
     ])
-
     def test_get_json(
-        self, test_url: str, test_payload: Dict[str, Any]) -> None:
+            self, test_url: str, test_payload: Dict[str, Any]) -> None:
         """FUNC """
         with patch('requests.get') as mocked_get:
             mocked_get.return_value.json.return_value = test_payload
@@ -52,10 +51,12 @@ class TestGetJson(unittest.TestCase):
 
 class TestMemoize(unittest.TestCase):
     """Test Memoize """
+
     def test_memoize(self):
         """func"""
         class TestClass:
             """class test"""
+
             def a_method(self):
                 """DOC"""
                 return 42
@@ -66,7 +67,7 @@ class TestMemoize(unittest.TestCase):
                 return self.a_method()
 
         with patch.object(
-            TestClass, 'a_method', return_value=42) as mock_method:
+                TestClass, 'a_method', return_value=42) as mock_method:
             """func"""
             instance = TestClass()
             self.assertEqual(instance.a_property, 42)  # Calls the a_method
