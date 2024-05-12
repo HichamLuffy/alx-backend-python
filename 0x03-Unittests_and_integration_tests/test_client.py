@@ -71,12 +71,12 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
     """test integration github org client doc"""
 
     @classmethod
-    def setUpClass(cls):
+    def setUpClass(cls) -> None:
         """set up class """
         cls.get_patcher = patch("requests.get")
         cls.mock_get = cls.get_patcher.start()
 
-        def side_effect(url):
+        def side_effect(url) -> Mock:
             """side effect"""
             class MockResponse:
                 def __init__(self, json_data):
@@ -94,7 +94,7 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         cls.mock_get.side_effect = side_effect
 
     @classmethod
-    def tearDownClass(cls):
+    def tearDownClass(cls) -> None:
         """tear down"""
         cls.get_patcher.stop()
 
