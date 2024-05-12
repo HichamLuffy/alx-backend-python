@@ -68,15 +68,15 @@ class TestGithubOrgClient(unittest.TestCase):
 @parameterized_class(('org_payload', 'repos_payload',
                       'expected_repos', 'apache2_repos'), TEST_PAYLOAD)
 class TestIntegrationGithubOrgClient(unittest.TestCase):
-    """doc doc doc"""
+    """test integration github org client doc"""
     @classmethod
     def setUpClass(cls):
-        """doc doc doc"""
+        """set up class"""
         cls.get_patcher = patch("requests.get")
         cls.mock_get = cls.get_patcher.start()
 
         def side_effect(url):
-            """doc doc doc"""
+            """side effect"""
             class MockResponse:
                 def __init__(self, json_data):
                     self.json_data = json_data
@@ -95,5 +95,15 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
 
     @classmethod
     def tearDownClass(cls):
-        """doc doc doc"""
+        """tear down"""
         cls.get_patcher.stop()
+
+    def test_public_repos(self):
+        """ public repos"""
+        client = GithubOrgClient('google')
+        self.assertEqual(client.public_repos(), self.expected_repos)
+
+    def test_public_repos_with_license(self):
+        """ public repos with license"""
+        client = GithubOrgClient('google')
+        self.assertEqual(client.public_repos(license="apache-2.0"), self.apache2_repos)
