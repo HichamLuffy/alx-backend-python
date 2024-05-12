@@ -41,7 +41,7 @@ class TestGithubOrgClient(unittest.TestCase):
 
     @patch("client.get_json",
            return_value=[{"name": "repo1"}, {"name": "repo2"}])
-    def test_public_repos(self, mock_get_json) -> None:
+    def test_public_repos(self, mock_get_json: Mock) -> None:
         """doc doc doc"""
         with patch(
             "client.GithubOrgClient._public_repos_url",
@@ -91,7 +91,6 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
                 return MockResponse(cls.repos_payload)
             else:
                 return None
-
         cls.mock_get.side_effect = side_effect
 
     @classmethod
@@ -99,13 +98,13 @@ class TestIntegrationGithubOrgClient(unittest.TestCase):
         """tear down"""
         cls.get_patcher.stop()
 
-    def test_public_repos(self):
-        """ public repos"""
+    def test_public_repos(self) -> None:
+        """public repos"""
         client = GithubOrgClient('google')
         self.assertEqual(client.public_repos(), self.expected_repos)
 
-    def test_public_repos_with_license(self):
-        """ public repos with license"""
+    def test_public_repos_with_license(self) ->None:
+        """public repos with license"""
         client = GithubOrgClient('google')
         client_repos = client.public_repos(license="apache-2.0")
         self.assertEqual(client_repos, self.apache2_repos)
