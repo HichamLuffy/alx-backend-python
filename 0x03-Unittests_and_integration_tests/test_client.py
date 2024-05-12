@@ -69,6 +69,7 @@ class TestGithubOrgClient(unittest.TestCase):
                       'expected_repos', 'apache2_repos'), TEST_PAYLOAD)
 class TestIntegrationGithubOrgClient(unittest.TestCase):
     """test integration github org client doc"""
+
     @classmethod
     def setUpClass(cls):
         """set up class """
